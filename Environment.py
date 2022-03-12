@@ -77,6 +77,20 @@ class Environment:
 		network2.subtract_weights = np.add(subtract_weights_2, subtract_weights_1_inverted)
 		network2.multiply_weights = np.add(multiply_weights_2, multiply_weights_1_inverted)
 		network2.divide_weights = np.add(divide_weights_2, divide_weights_1_inverted)
-  
+	
+	def run(network: Network, input_image: np.array):
+		# Go though each layer and calculate the output
+		for layer in range(network.depth):
+			# Get the weights for the current layer
+			add_weights = network.add_weights[layer]
+			subtract_weights = network.subtract_weights[layer]
+			multiply_weights = network.multiply_weights[layer]
+			divide_weights = network.divide_weights[layer]
+			# Calculate the output for the current layer
+			input_image = np.add(np.subtract(np.divide(np.multiply(input_image, multiply_weights), divide_weights), subtract_weights), add_weights)
+
+		# Add of all of the outputs
+		return np.sum(input_image)
+		 
 
 		

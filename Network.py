@@ -3,7 +3,7 @@ import random
 
 
 class Network:
-
+    depth = 0
     size = 0
     add_weights = np.array([])
     subtract_weights = np.array([])
